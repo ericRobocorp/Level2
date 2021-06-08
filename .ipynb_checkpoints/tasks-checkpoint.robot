@@ -73,22 +73,18 @@ Order another robot
 
 *** keywords ***
 Create a ZIP file of the receipts
-    Archive folder with zip     ${CURDIR}${/}output${/}   ${CURDIR}${/}allOrders.zip   include=*_FinalOrder.pdf
+    Archive folder with zip     ${CURDIR}${/}output   ${CURDIR}${/}allOrders.zip   include=*_FinalOrder.pdf
 
 *** Keywords ***
 Some user input
     ${secret}=  Get Secret  myURL
     Add icon    Success
-    Add heading   Would you like to go to ${secret}[theURL]
+    Add heading   ${secret}[theURL]
     Add submit buttons    buttons=No,Yes    default=Yes
     ${result}=    Run dialog
-    IF   $result.submit == "Yes"
-        #Delete working folder
-        Add icon    Warning
-        Add Heading   Too bad, that's for another lesson. Have a great day!
-        Add submit buttons    buttons=OK
-        Run Dialog
-    END
+    #IF   $result.submit == "Yes"
+    #    Delete working folder
+    #END
 
 *** Keywords ***
 Delete working folder

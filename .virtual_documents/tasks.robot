@@ -19,6 +19,7 @@ Open the robot order website
     Open Available Browser       https://robotsparebinindustries.com/#/robot-order
     Click Button    OK
 
+
 *** Keywords ***
 Get Orders
     Download    https://robotsparebinindustries.com/orders.csv  target_file=${CURDIR}${/}output${/}orders.csv  overwrite=true
@@ -34,6 +35,7 @@ Fill the form
     Input Text   xpath: /html/body/div/div/div[1]/div/div[1]/form/div[3]/input   ${row}[Legs]
     Input Text   address    ${row}[Address]
 
+
 *** keywords***
 Preview the robot
     Click Button    Preview
@@ -44,6 +46,7 @@ Submit the order
     Click Button    order
     Page Should Contain Button     order-another
 
+
 *** Keywords ***
 Create order PDF
     [Arguments]     ${orderNum}
@@ -51,11 +54,13 @@ Create order PDF
     ${order_results_html}=    Get Element Attribute    id:order-completion    outerHTML
     Html To Pdf    ${order_results_html}    ${CURDIR}${/}output${/}order${/}${orderNum}.pdf
 
+
 *** Keywords ***
 Take screenshot
     [Arguments]     ${orderNum}
     Wait Until Element Is Visible    robot-preview
     Capture Element Screenshot    robot-preview    ${CURDIR}${/}output${/}images${/}${orderNum}.png
+
 
 *** Keywords ***
 Combine PDF
@@ -66,14 +71,17 @@ Combine PDF
     ...    ${CURDIR}${/}output${/}order${/}${orderNum}.pdf
     Add Files To Pdf    ${files}   ${CURDIR}${/}output${/}${orderNum}_FinalOrder.pdf
 
+
 *** Keywords ***
 Order another robot
     Click Button    order-another
     Click Button    OK
 
+
 *** keywords ***
 Create a ZIP file of the receipts
     Archive folder with zip     ${CURDIR}${/}output${/}   ${CURDIR}${/}allOrders.zip   include=*_FinalOrder.pdf
+
 
 *** Keywords ***
 Some user input
@@ -90,6 +98,7 @@ Some user input
         Run Dialog
     END
 
+
 *** Keywords ***
 Delete working folder
     #Remove Directory    ${CURDIR}${/}output     recursive=true
@@ -97,6 +106,7 @@ Delete working folder
     FOR    ${file}  IN  @{FILES}
         Run Keyword If File Exists   "\*.png"    Remove file    ${file}
     END
+
 
 *** Tasks ***
 Order robots from RobotSpareBin Industries Inc
@@ -116,4 +126,3 @@ Order robots from RobotSpareBin Industries Inc
     Some user input
     #Delete working folder
     [Teardown]  Close Browser
-
