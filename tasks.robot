@@ -14,10 +14,12 @@ Library     RPA.Dialogs
 Library     RPA.Robocloud.Secrets
 
 
+
 *** Keywords ***
 Open the robot order website
     Open Available Browser       https://robotsparebinindustries.com/#/robot-order
     Click Button    OK
+   
 
 *** Keywords ***
 Get Orders
@@ -73,7 +75,7 @@ Order another robot
 
 *** keywords ***
 Create a ZIP file of the receipts
-    Archive folder with zip     ${CURDIR}${/}output${/}   ${CURDIR}${/}allOrders.zip   include=*_FinalOrder.pdf
+    Archive folder with zip     ${CURDIR}${/}output${/}   ${CURDIR}${/}output${/}allOrders.zip   include=*_FinalOrder.pdf
 
 *** Keywords ***
 Some user input
